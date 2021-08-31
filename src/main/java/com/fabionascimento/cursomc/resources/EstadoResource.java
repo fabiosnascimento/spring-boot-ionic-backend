@@ -17,6 +17,8 @@ import com.fabionascimento.cursomc.dto.EstadoDTO;
 import com.fabionascimento.cursomc.services.CidadeService;
 import com.fabionascimento.cursomc.services.EstadoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/estados")
 public class EstadoResource {
@@ -27,6 +29,7 @@ public class EstadoResource {
 	@Autowired
 	private CidadeService cidadeService;
 	
+	@ApiOperation(value="Retorna todos os estados")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EstadoDTO>> findAll() {
 		List<Estado> list = service.findAll();
@@ -34,6 +37,7 @@ public class EstadoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@ApiOperation(value="Retorna todas as cidades de determinado estado")
 	@RequestMapping(value="/{estadoId}/cidades", method=RequestMethod.GET)
 	public ResponseEntity<List<CidadeDTO>> findCidades(@PathVariable Integer estadoId) {
 		List<Cidade> list = cidadeService.findByEstado(estadoId);
